@@ -1,0 +1,19 @@
+# ===== Build output =====
+build/
+**/build/
+
+# ===== CMake =====
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.cmake.user
+
+# ===== Visual Studio =====
+.vs/
+x64/
+Debug/
+Release/
+*.suo
+*.user
+*.filters
+*.vcxproj.user

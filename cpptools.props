@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!-- 如果失败返回根目录删除：.vs 和 x64 folder/file -->
+	
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories>
+				$(ProjectDir)libs\cpptools\include;
+				$(ProjectDir)libs\cpptools\include\cpptools;
+				%(AdditionalIncludeDirectories)
+			</AdditionalIncludeDirectories>
+			<OpenMPSupport>true</OpenMPSupport>
+		</ClCompile>
+	</ItemDefinitionGroup>
+	
+	
+	<ItemGroup>
+		<!-- 实现文件 -->
+		<ClCompile Include="$(ProjectDir)libs\cpptools\src\*\*\*.cpp" />
+
+	</ItemGroup>
+
+</Project>
