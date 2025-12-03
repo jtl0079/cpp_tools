@@ -1,17 +1,25 @@
-#pragma once
+﻿#pragma once
+
+#include <cpptools/core/traits.hpp>
 
 namespace cpptools::framework::math::backend::serial {
 
-	template<typename T, size_t N>
-	T get_sum(T(&t)[N]) {
-		T sum{};
 
-		for (int i = 0; i < N; i++) {
-			sum += t[i];
-		}
 
-		return sum;
 
-	}
+    template<typename Arr>
+    auto get_sum(const Arr& arr) {
+        namespace core_traits = cpptools::core::traits;
+
+        using T = std::remove_all_extents_t<Arr>;
+        T result{};
+
+        core_traits::for_each(const_cast<Arr&>(arr), [&](auto& v) {
+            result += v;
+            });
+
+        return result;
+    }
+
 
 }

@@ -1,28 +1,35 @@
 ﻿#pragma once
 
+#include <random>
+#include <cpptools/core/traits.hpp>
+
+
 namespace cpptools::framework::filler::backend::serial {
 
-    template<class T, size_t N>
-    void fill_zero_impl(T(&arr)[N]) {
-        for (auto& x : arr) {
-            x = T{};
-        }
+    template<typename T, typename Arr, typename... Rest>
+    void fill(const T& value, Arr& arr, Rest&... rest) {
+        namespace core_traits = cpptools::core::traits;
+
+        core_traits::for_each(arr, [&](auto& v) {
+            v = value;
+            });
+
+        if constexpr (sizeof...(rest) > 0)
+            (fill_zero(rest), ...);
     }
 
-    // 基础版本：单个二维数组
-    template<typename T, size_t M, size_t N>
-    void fill_zero_impl(T(&t)[M][N]) {
-        for (size_t i = 0; i < M; ++i) {
-            for (size_t j = 0; j < N; ++j) {
-                t[i][j] = T{};
-            }
-        }
+
+    template<typename Arr, typename... Rest>
+    void fill_zero(Arr& arr, Rest&... rest) {
+        namespace core_traits = cpptools::core::traits;
+        
+        core_traits::for_each(arr, [](auto& v) {
+            v = 0;
+            });
+
+        if constexpr (sizeof...(rest) > 0)
+            (fill_zero(rest), ...);
     }
 
-    // 可变参数模板：接收多个数组
-    template<typename... Arrays>
-    void fill_zero(Arrays&... arrays) {
-        (fill_zero_impl(arrays), ...);  // C++17 fold expression
-    }
 
 }

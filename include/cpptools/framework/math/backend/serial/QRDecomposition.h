@@ -10,10 +10,11 @@ namespace cpptools::framework::math::backend::serial {
 
 
 
-	template<typename T, size_t N, size_t N2>
-	double getL2Norm(T(&t)[N], T(&t2)[N2]) {
-		return sqrt(get_dot(t, t2));
+	template<typename T, size_t N, typename... Vecs>
+	double getL2Norm(const T(&first)[N], const Vecs(&... vecs)[N]) {
+		return std::sqrt(get_dot(first, vecs...));
 	}
+
 
 
 
