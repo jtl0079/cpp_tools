@@ -19,7 +19,10 @@ set(AUTO_GENERATED_ROOT "${CMAKE_BINARY_DIR}/auto_generated")
 
 
 
-
+generate_aggregate_headers_for_each_level_ignore_build(
+    "${CMAKE_CURRENT_LIST_DIR}/include"
+    "${CMAKE_CURRENT_LIST_DIR}/include"
+)
 
 
 generate_recursive_aggregate_headers_to_upper_dir_for_each_level(

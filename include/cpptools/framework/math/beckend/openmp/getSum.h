@@ -4,7 +4,7 @@
 #include<omp.h>
 #include<vector>
 
-namespace cpptools::framework::openmp {
+namespace cpptools::framework::math::backend::openmp {
 
 	// 泛型函数：对 vector 中的所有元素进行求和
 	// T 必须支持默认构造 T{} 以及运算符 +=

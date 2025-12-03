@@ -19,6 +19,18 @@ project/                                    # 顶层仓库根目录
 │       │   ├── openmp/
 │       │   │   ├── openmp.h                # 对外宏/配置/简单 API（不要放实现）              # header-only: 小心 inline
 │       │   │   └── TOpenMP.h               # TOpenMP 接口声明（class/struct）               # 保持轻量
+│       │   ├── math/
+│       │   │   ├── api/
+│       │   │   │   └── ops.h
+│       │   │   ├── backend/
+│       │   │   │   ├── serial/
+│       │   │   │   │   └── logic.h
+│       │   │   │   ├── openmp/
+│       │   │   │   │   └── logic.h
+│       │   │   │   └── cuda/
+│       │   │   │       └── logic.h
+│       │   │   └── dispatch
+│       │   │       └── selected.h
 │       │   └── utils/
 │       │       └── string/
 │       │           └── string_utils.h      # 字符串工具声明（trim/split/format）            # 只放接口/inline
@@ -103,22 +115,3 @@ git commit -m "update all"
 git push
 ```
 
-```
-
-
-├── build/auto generate/include/  
-│   ├── cpptools.h          # 有 include 他之下所有的文件 ，eg. modules.h， framework.h 
-│   └── cpptools/                           
-│       ├── framework.h                      #  
-│       ├── framework/
-│       │   ├── openmp.h              # include了他之下的文件 (eg. TOpenMP.h 排除聚合头${dir}.h)
-│       │   ├── openmp/
-│       │   │   ├── openmp.h                #               
-│       │   │   └── TOpenMP.h               #    
-│       │   ├── utils.h
-│       │   └── utils/
-│       │       └──  string_utils.h      #              
-│       │
-│       ├── modules.h
-│       └── modules/
-```
