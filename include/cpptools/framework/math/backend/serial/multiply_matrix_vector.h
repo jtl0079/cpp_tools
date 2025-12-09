@@ -10,8 +10,8 @@ namespace cpptools::framework::math::backend::serial {
     void multiply_matrix_vector(const Matrix& matrix, const Vector& vec, Out& out) {
         using namespace cpptools::core::traits;
 
-        const size_t M = size(matrix);        // 行数
-        const size_t N = size(get(matrix, 0)); // 列数
+        const size_t M = size(matrix);          // col
+        const size_t N = size(get(matrix, 0));  // row
 
         // 用户必须保证 vec.size() >= N，out.size() >= M
         for (size_t i = 0; i < M; ++i) {

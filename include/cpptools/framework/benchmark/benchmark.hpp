@@ -1,3 +1,3 @@
 #pragma once
 
-#include <cpptools/framework/benchmark/measureDuration.h>
+#include <cpptools/framework/benchmark/backend.hpp>

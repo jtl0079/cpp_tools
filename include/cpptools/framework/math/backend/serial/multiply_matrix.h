@@ -5,30 +5,13 @@
 namespace cpptools::framework::math::backend::serial {
 
 
-	template<typename T, size_t M, size_t N, size_t P>
-	void multiplyMatrix(T(&A)[M][N], T(&B)[N][P], T(&result)[M][P]) {
-		// clean
-		for (size_t i = 0; i < M; ++i)
-			for (size_t j = 0; j < P; ++j)
-				result[i][j] = 0;
-
-		// input 
-		for (size_t i = 0; i < M; ++i) {
-			for (size_t k = 0; k < N; ++k) {
-				T v = A[i][k];
-				for (size_t j = 0; j < P; ++j) {
-					result[i][j] += v * B[k][j];
-				}
-			}
-		}
-	}
 
 
     template<class MatA, class MatB, class MatC>
     void multiply_matrix(const MatA& A, const MatB& B, MatC& C_result) {
 
-        using namespace core_traits;
-
+        using namespace cpptools::core::traits;
+        
         const size_t M = size(A);
         const size_t N = size(get(A, 0));
         const size_t N2 = size(B);

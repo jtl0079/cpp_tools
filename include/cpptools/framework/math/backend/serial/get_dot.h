@@ -7,69 +7,28 @@
 
 namespace cpptools::framework::math::backend::serial {
 
-    // ---------------------------------------------
-    // multiply_at：单个 index 处的乘积
-    // ---------------------------------------------
+    template<class T1, class... Ts>
+    auto get_dot(const T1& vector_a, const Ts&... rest)
+    {
+        using namespace cpptools::core::traits;
 
-    // 原生数组版本
-    template<typename T, size_t N, typename... Vecs>
-    T multiply_at(size_t i, const T(&first)[N], const Vecs(&... vecs)[N]) {
-        return (first[i] * ... * vecs[i]);
-    }
+        const size_t n = cpptools::core::traits::size(vector_a);
 
-    // std::vector version
-    template<typename T, typename... Vecs>
-    T multiply_at(size_t i, const std::vector<T>& first, const Vecs&... vecs) {
-        return (first[i] * ... * vecs[i]);
-    }
+        // 运行时检查（数组会编译期检查，但容器要 runtime）
+        ((cpptools::core::traits::size(rest) == n ? void() : throw std::runtime_error("get_dot(): size mismatch")), ...);
 
-    // std::array version
-    template<typename T, size_t N, typename... Vecs>
-    T multiply_at(size_t i, const std::array<T, N>& first, const Vecs&... vecs) {
-        return (first[i] * ... * vecs[i]);
-    }
+        using Val = std::decay_t<decltype(get(vector_a, 0))>;
 
-    // ---------------------------------------------
-    // get_dot：任意数量向量
-    // ---------------------------------------------
+        Val sum = Val{ 0 };
 
-    // --------- 原生数组 ----------
-    template<typename T, size_t N, typename... Vecs>
-    T get_dot(const T(&first)[N], const Vecs(&... vecs)[N]) {
-        static_assert((std::is_same_v<const T(&)[N], const Vecs(&)[N]> && ...),
-            "All arrays must have the same size");
-
-        T sum{};
-        for (size_t i = 0; i < N; i++) {
-            sum += multiply_at(i, first, vecs...);
+        for (size_t i = 0; i < n; ++i) {
+            Val product = get(vector_a, i);
+            ((product *= get(rest, i)), ...);   // 依次相乘
+            sum += product;
         }
+
         return sum;
     }
 
-    // --------- std::vector ----------
-    template<typename T, typename... Vecs>
-    T get_dot(const std::vector<T>& first, const Vecs&... vecs) {
-        size_t N = first.size();
-        assert(((vecs.size() == N) && ...) && "All vectors must have the same size");
-
-        T sum{};
-        for (size_t i = 0; i < N; i++) {
-            sum += multiply_at(i, first, vecs...);
-        }
-        return sum;
-    }
-
-    // --------- std::array ----------
-    template<typename T, size_t N, typename... Vecs>
-    T get_dot(const std::array<T, N>& first, const Vecs&... vecs) {
-        static_assert(((std::is_same_v<std::array<T, N>, Vecs> && ...)),
-            "All std::array must have the same size and type");
-
-        T sum{};
-        for (size_t i = 0; i < N; i++) {
-            sum += multiply_at(i, first, vecs...);
-        }
-        return sum;
-    }
 
 } 

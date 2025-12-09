@@ -30,7 +30,18 @@ project/                                    # 顶层仓库根目录
 │       │   │   │   ├── openmp/
 │       │   │   │   │   └── logic.h
 │       │   │   │   └── cuda/
-│       │   │   │       └── logic.h
+│       │   │   │       ├── linear/
+│       │   │   │       ├── vector/
+│       │   │   │       ├── matrix/
+│       │   │   │       ├── statistics/
+│       │   │   │       └── signal/
+│       │   │   ├── benchmark/
+│       │   │   │   ├── serial/
+│       │   │   │   ├── openmp/
+│       │   │   │   ├── cuda/
+│       │   │   │   └── allversion/
+│       │   │   │       └── linear/
+│       │   │   ├── tuning/
 │       │   │   └── dispatch
 │       │   │       └── selected.h
 │       │   └── utils/

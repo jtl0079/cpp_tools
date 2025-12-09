@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace cpptools::framework::benchmark {
+namespace cpptools::framework::benchmark::backend::serial {
 
 	//------------------------------------------------------------------------------
 	// measureDuration（适用于返回 void 的函数）
@@ -21,7 +21,7 @@ namespace cpptools::framework::benchmark {
 		typename R = std::invoke_result_t<F>,
 		std::enable_if_t<std::is_void_v<R>, int> = 0
 	>
-	Duration measureDuration(F&& func)
+	Duration measure_duration(F&& func)
 	{
 		using clock = std::chrono::steady_clock;
 
@@ -56,7 +56,7 @@ namespace cpptools::framework::benchmark {
 		typename R = std::invoke_result_t<F>,
 		std::enable_if_t<!std::is_void_v<R>, int> = 0
 	>
-	std::pair<Duration, R> measureDuration(F&& func)
+	std::pair<Duration, R> measure_duration(F&& func)
 	{
 		using clock = std::chrono::steady_clock;
 
