@@ -5,7 +5,7 @@ include_guard(GLOBAL)
 set(SDL3_SOURCE_GIT_REPOSITORY
     "https://github.com/libsdl-org/SDL.git"
     CACHE STRING "SDL3 source git repository"
-)
+)  
 
 set(SDL3_MIRROR_GIT_REPOSITORY
     "https://github.com/org-foundation/mirrors_sdl.git"

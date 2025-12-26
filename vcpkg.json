@@ -4,12 +4,13 @@
   "dependencies": [
     {
       "name": "ffmpeg",
-      "default-features": true,
+      "default-features": false,
       "features": [
         "avcodec",
         "avformat",
         "swscale",
-        "swresample"
+        "swresample",
+        "x264"
       ]
     }
   ]

@@ -1,5 +1,9 @@
 ﻿function(cpptools_enable_sdl3)
-  cpptools_resolve_sdl3()
+
+  cmake_tools_resolve_sdl(
+      VERSION   3
+             
+  )
 
   if(NOT TARGET cpptools::sdl3)
     add_library(cpptools_sdl3 INTERFACE)

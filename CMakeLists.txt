@@ -8,6 +8,14 @@ project(cpptools
 
 message(STATUS "TOP LEVEL CMake Loaded")
 
+# preparation include<lib> start
+include(FetchContent)
+include(cmake/cpp_tools_bootstrap_cmake_tools.cmake)
+cpp_tools_bootstrap_cmake_tools()
+
+
+
+
 # --- 修正 1：使用 CMAKE_CURRENT_LIST_DIR 才是 cpptools 子模块路径 ---
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules")
 message(STATUS "CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
@@ -62,3 +70,6 @@ if(CPPTOOLS_ENABLE_FFMPEG)
   include(cmake/dependencies/ffmpeg/ffmpeg.cmake)
   #cpptools_enable_ffmpeg()
 endif()
+
+
+
